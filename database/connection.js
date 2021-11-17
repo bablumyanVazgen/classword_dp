@@ -7,7 +7,7 @@ const {
     DB_NAME
 } = process.env;
 
-const connection = mysql.createConnection({
+const db = mysql.createConnection({
     host     : DB_HOST,
     port     : DB_PORT,
     user     : DB_USERNAME,
@@ -15,4 +15,4 @@ const connection = mysql.createConnection({
     database : DB_NAME
 });
 
-module.exports = { connection };
+module.exports = { db };

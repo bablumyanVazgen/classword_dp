@@ -6,6 +6,12 @@ class User {
 
     // Get all
     static index = (req, res) => {
+        let sql = "SELECT * FROM users";
+
+        db.query(sql, (err, result) => {
+            if(err) throw err;
+            res.send(result)
+        })
 
     }
 
@@ -50,13 +56,26 @@ class User {
 
     // Update user by :id
     static update = function (req, res) {
-        // Create a new user
+        let  {name, gender, dob} = req.body; 
+        let {id} = req.params;
+        let sql = `UPDATE users SET name='${name}',gender='${gender}',dob='${dob}' WHERE id=${id}`;
+        db.query(sql, (err, result) => {
+            if(err) throw err;
+            res.status(200).send(req.body);
+        })
     }
 
     // Delete user by :id
     static destroy = function (req, res) {
-        // Create a new user
-    }
+        let {id} = req.params;
+        let sql = `DELETE FROM users WHERE id=${id}`;
+  
+      db.query(sql, (err, result) => {
+           if (err) throw err;
+           res.send(req.body);
+      })
+      }
+    
 }
 
 module.exports = { User }
